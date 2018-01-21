@@ -1,4 +1,3 @@
-import java.util.*;
 public class Combinatorics {
     
     protected long number;

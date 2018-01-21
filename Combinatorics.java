@@ -10,8 +10,8 @@ public class Combinatorics {
         number = 0;
     }
     
-    
-    public long binomial(int n, int m) {
+    // binomski koeficient rekurzivno - dinamicno
+    public long binomialDynamic(int n, int m) {
         long[][] t = new long[n+1][m+1];
         
         for (int i = 0; i < n+1; i++) {
@@ -29,12 +29,19 @@ public class Combinatorics {
         return t[n][m];
     }
     
+    // binomski koeficient iz formule
+    public long binomial(int n, int m) {
+        return fallingFactorial(n, m) / factorial(m);
+    }
+    
+    // faktoriela rekurzivno
     public long factorial(int n) {
         if (n == 0)
             return 1;
         return n * factorial(n-1);
     }
     
+    // Stirlingovo stevilo prve vrste iz rekurzije - dinamicno 
     public long stirlingFirst(int n, int m) {
         long[][] t = new long[n+1][m+1];
         
@@ -55,6 +62,7 @@ public class Combinatorics {
         return t[n][m];
     }
     
+    // Stirlingovo stevilo druge vrste iz rekurzije - dinamicno 
     public long stirlingSecond(int n, int m) {
         long[][] t = new long[n+1][m+1];
         
@@ -75,6 +83,7 @@ public class Combinatorics {
         return t[n][m];
     }
     
+    // Lahovo stevilo iz rekurzije - dinamicno
     public long lahDynamic(int n, int m) {
         long[][] t = new long[n+1][m+1];
         
@@ -93,10 +102,12 @@ public class Combinatorics {
         return t[n][m];
     }
     
+    // Lahovo stevilo iz formule
     public long lah(int n, int m) {
         return binomial(n-1, m-1) * factorial(n) / factorial(m);
     }
     
+    // Bellovo stevilo iz Stirlingovega stevila druge vrste
     public long bells(int n) {
         long a = 0;
         for (int i = 0; i <= n; i++) {
@@ -105,6 +116,7 @@ public class Combinatorics {
         return a;
     }
     
+    // Bellovo stevilo po izreku
     public long bell(int n) {
         long[] b = new long[n+1];
         b[0] = 1;
@@ -116,6 +128,7 @@ public class Combinatorics {
         return b[n];
     }
     
+    // Eulerjeva funkcija phi
     public int eulersFunctionPhi(int n) {
         int count = 0;
         for (int i = 1; i < n+1; i++) {
@@ -125,6 +138,7 @@ public class Combinatorics {
         return count;
     }
     
+    // greatest common divisor EA
     public int gcd(int a, int b) {
         if (a < b) {
             int t = a;
@@ -137,7 +151,8 @@ public class Combinatorics {
             return gcd(b, a % b);
     }
     
-    public long padajocePotence(int n, int k) {
+    // padajoce potence iterativno
+    public long fallingFactorial(int n, int k) {
         long a = n;
         for (int i = 1; i < k; i++) {
             a *= (n - i);
@@ -145,7 +160,8 @@ public class Combinatorics {
         return a;
     }
     
-    public long narascajocePotence(int n, int k) {
+    // narascajoce potence iterativno
+    public long risingFactorial(int n, int k) {
         long a = n;
         for (int i = 1; i < k; i++) {
             a *= (n + i);
@@ -153,6 +169,7 @@ public class Combinatorics {
         return a;
     }
     
+    // multinomski koeficient
     public long multinomial(int n, int[] k) {
         long l = 1;
         for (int i = 0; i < k.length; i++) {

@@ -10,6 +10,13 @@ public class Combinatorics {
         number = 0;
     }
     
+    /*
+    *   BINOMSKI KOEFICIENT
+    *   "n nad k" je stevilo k podmnozic mnozice [n]
+    *   
+    *   ([n] = {1, 2, 3, ..., n})
+    */
+    
     // binomski koeficient rekurzivno - dinamicno
     public long binomialDynamic(int n, int m) {
         long[][] t = new long[n+1][m+1];
@@ -34,12 +41,25 @@ public class Combinatorics {
         return fallingFactorial(n, m) / factorial(m);
     }
     
+    /*
+    *   Fakulteta
+    *   n! = n * ... * 1 
+    */
+    
     // faktoriela rekurzivno
     public long factorial(int n) {
         if (n == 0)
             return 1;
         return n * factorial(n-1);
     }
+    
+    /*
+    *   Stirlingova stevila 1. vrste
+    *   c(n, k) = "stevilo premutacij v Sn s k cilki"
+    *   = "stevilo razdelitev [n] na k ciklicno urejenih blokov"
+    *   
+    *   (Sn - simetricna grupa)
+    */
     
     // Stirlingovo stevilo prve vrste iz rekurzije - dinamicno 
     public long stirlingFirst(int n, int m) {
@@ -62,6 +82,13 @@ public class Combinatorics {
         return t[n][m];
     }
     
+    /*
+    *   Stirlingova stevila 2. vrste
+    *   S(n, k) = "stevilo razdelitev mnozice [n] na k blokov"
+    *   
+    *   (razdelitve - razbitja mnozice na neprazne disjunktne podmnozice)
+    */
+    
     // Stirlingovo stevilo druge vrste iz rekurzije - dinamicno 
     public long stirlingSecond(int n, int m) {
         long[][] t = new long[n+1][m+1];
@@ -82,6 +109,11 @@ public class Combinatorics {
         }
         return t[n][m];
     }
+    
+    /*
+    *   Lahova stevila (Ivo Lah)
+    *   L(n, k) = "stevilo razdelitev [n] na k linearno urejenih blokov"
+    */
     
     // Lahovo stevilo iz rekurzije - dinamicno
     public long lahDynamic(int n, int m) {
@@ -106,6 +138,11 @@ public class Combinatorics {
     public long lah(int n, int m) {
         return binomial(n-1, m-1) * factorial(n) / factorial(m);
     }
+     
+    /*
+    *   Bellovo stevilo
+    *   B(n) = "stevilo razdelitev [n]"
+    */
     
     // Bellovo stevilo iz Stirlingovega stevila druge vrste
     public long bells(int n) {
@@ -128,7 +165,12 @@ public class Combinatorics {
         return b[n];
     }
     
-    // Eulerjeva funkcija phi
+    /*
+    *   Eulerjeva funkcija phi
+    *   phi(n) = "stevilo stevil med 1 in n, ki so tuja z n"
+    *   = |{m je element [n] : gcd(m, n) = 1}|
+    */
+    
     public int eulersFunctionPhi(int n) {
         int count = 0;
         for (int i = 1; i < n+1; i++) {
@@ -138,7 +180,11 @@ public class Combinatorics {
         return count;
     }
     
-    // greatest common divisor EA
+    /*
+    *   Najvecji skupni deljitelj
+    *   izracunan preko evklidovega algoritma
+    */
+    
     public int gcd(int a, int b) {
         if (a < b) {
             int t = a;
@@ -151,6 +197,11 @@ public class Combinatorics {
             return gcd(b, a % b);
     }
     
+    /*
+    *   Padajoce potence
+    *   "n na k padajoce" = n * (n - 1) * ... * (n - k + 1)
+    */
+    
     // padajoce potence iterativno
     public long fallingFactorial(int n, int k) {
         long a = n;
@@ -159,6 +210,11 @@ public class Combinatorics {
         }
         return a;
     }
+    
+    /*
+    *   Narascajoce potence
+    *   "n na k narascajoce" = n * (n + 1) * ... * (n + k - 1)
+    */
     
     // narascajoce potence iterativno
     public long risingFactorial(int n, int k) {
@@ -169,7 +225,16 @@ public class Combinatorics {
         return a;
     }
     
-    // multinomski koeficient
+    /*
+    *   Mutinomski koeficient
+    *   Koliko je preslikav f:[n]->[b], pri cemer se
+    *   n[i] elementov slika v i = 1, ..., k
+    *   
+    *   veljati mora : n = n[1] + n[2] + ... + n[k]
+    *   "n nad n[1], ..., n[k]" = n! / (n[1]! * ... * n[k]!)
+    */
+    
+    // multinomski koeficient po formuli
     public long multinomial(int n, int[] k) {
         long l = 1;
         for (int i = 0; i < k.length; i++) {
